@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Arethium Ai-Login Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/auth.css}" />
+</head>
+<body>
+<div class="auth-container">
+    <form th:action="@{/authorization/login}" th:object="${loginDTO}" method="post">
+        <h2>Login Page</h2>
+        <input type="email" th:field="*{email}" placeholder="Email Address" required/><br>
+        <input type="password" th:field="*{password}" placeholder="Password" required/><br>
+
+        <button type="submit">Login</button>
+
+        <div th:if="${message}" id="message">
+            <p th:text="${message}"></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

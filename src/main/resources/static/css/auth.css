@@ -1,0 +1,65 @@
+body {
+    /* Atmospheric dark gradient background */
+    background: linear-gradient(135deg, #1a2a6c, #2e6370, #0e3642);
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.auth-container {
+    /* The Glass Effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 3rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.auth-container input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 12px;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-radius: 50px; /* Rounded pill shape */
+    box-sizing: border-box;
+}
+
+.auth-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-container button {
+    background: white;
+    color: #333;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#message {
+    color: #801f1f;
+    font-family: "monospace", "Candara Light";
+    font-weight: bolder;
+}
+
+h1{
+    font-weight: bold;
+    font-family: "Inter Semi Bold", ui-monospace;
+    color: #267a5f;
+    font-size: larger;
+}
