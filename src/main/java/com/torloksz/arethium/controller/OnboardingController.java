@@ -25,6 +25,7 @@ public class OnboardingController {
     @GetMapping("/welcome")
     public String showWelcome() {
         Users user = onboardingService.getUserSession();
+        System.out.println(user);
         if(user==null)
             return "redirect:/authorization/login";
         return user.getGoals()==null?"welcomePage":"redirect:/dashboard/home";

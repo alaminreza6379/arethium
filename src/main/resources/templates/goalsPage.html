@@ -10,13 +10,15 @@
     <form th:action="@{/onboarding/goals}" th:object="${goalsDTO}" method="post">
 
         <label>What role do you want?</label>
-        <select th:field="*{targetRole}" required>
-            <option value="BACKEND">Backend Engineer</option>
-            <option value="FRONTEND">Frontend Engineer</option>
-            <option value="FULLSTACK">Fullstack Engineer</option>
-            <option value="DEVOPS">DevOps Engineer</option>
-        </select>
-
+        <div class="custom-select">
+            <select th:field="*{targetRole}">
+                <option value="BACKEND" >Backend Engineer</option>
+                <option value="FRONTEND">Frontend Engineer</option>
+                <option value="FULLSTACK">Fullstack Engineer</option>
+                <option value="DEVOPS">DevOps Engineer</option>
+            </select>
+        </div>
+        <br>
         <label>Target Company (Optional)</label>
         <input type="text" th:field="*{targetCompany}" placeholder="e.g., Google">
 

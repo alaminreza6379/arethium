@@ -35,6 +35,7 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("message",messageDTO.message());
 
         if(messageDTO.message().contains("Success")) {
+            userSession.init(registerDTO.email());
             return "redirect:/onboarding/welcome";
         }
         return "redirect:/authorization/login";
@@ -52,8 +53,8 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("message",messageDTO.message());
 
         if (messageDTO.message().contains("Success")) {
+            userSession.init(loginDTO.email());
             if (messageDTO.message().contains("true")){
-                userSession.init(loginDTO.email());
                 return "redirect:/dashboard/home";
             }
             else
