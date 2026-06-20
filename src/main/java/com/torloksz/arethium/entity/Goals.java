@@ -15,12 +15,18 @@ public class Goals {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String targetRole;
 
+    @Column(nullable = false)
     private String targetCompany;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private Users users;
 
+    public Goals(String targetRole,String targetCompany) {
+        this.targetCompany = targetCompany;
+        this.targetRole = targetRole;
+    }
 }

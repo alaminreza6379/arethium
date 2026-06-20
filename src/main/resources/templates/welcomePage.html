@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to Arethium</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+<div class="auth-container">
+    <h1>Welcome to Arethium!</h1>
+    <p>Let's define your destination.</p>
+
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+        </div>
+        <div class="progress-labels">
+            <span>Register</span>
+            <span>Welcome</span>
+            <span>Goals</span>
+        </div>
+    </div>
+
+    <div class="action-area">
+        <a th:href="@{/onboarding/goal}" class="btn-primary">Start Goal Setup</a>
+    </div>
+</div>
+</body>
+</html>

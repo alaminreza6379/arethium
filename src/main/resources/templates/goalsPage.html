@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Arethium - Define Your Goal</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+<div class="auth-container">
+    <h2>Define your destination.</h2>
+    <form th:action="@{/onboarding/goals}" th:object="${goalsDTO}" method="post">
+
+        <label>What role do you want?</label>
+        <select th:field="*{targetRole}" required>
+            <option value="BACKEND">Backend Engineer</option>
+            <option value="FRONTEND">Frontend Engineer</option>
+            <option value="FULLSTACK">Fullstack Engineer</option>
+            <option value="DEVOPS">DevOps Engineer</option>
+        </select>
+
+        <label>Target Company (Optional)</label>
+        <input type="text" th:field="*{targetCompany}" placeholder="e.g., Google">
+
+        <button type="submit" class="btn-primary">Complete Setup</button>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="step active">1</div>
+                <div class="step active">2</div>
+                <div class="step">3</div>
+            </div>
+            <div class="progress-labels">
+                <span>Register</span>
+                <span>Welcome</span>
+                <span>Goals</span>
+            </div>
+        </div>
+
+        <div th:if="${message}" id="message">
+            <p th:text="${message}"></p>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
