@@ -7,11 +7,6 @@ import com.torloksz.arethium.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +20,6 @@ public class AuthController {
 
 
     private final AuthService authService;
-    private final AuthenticationManager authenticationManager;
 
 
     @PostMapping("/register")
@@ -39,7 +33,6 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("message",messageDTO.message());
 
         if(messageDTO.message().contains("Success")) {
-            authenticateUser(registerDTO,request);
             return "redirect:/onboarding/welcome";
         }
         return "redirect:/authorization/login";
@@ -77,13 +70,5 @@ public class AuthController {
     public String showLoginForm(Model model) {
         model.addAttribute("loginDTO",new LoginDTO("",""));
         return "loginPage";
-    }
-
-    private void authenticateUser(RegisterDTO registerDTO, HttpServletRequest request) {
-        UsernamePasswordAuthenticationToken authRequest =
-                new UsernamePasswordAuthenticationToken(registerDTO.email(), registerDTO.password());
-        Authentication authentication = authenticationManager.authenticate(authRequest);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
     }
 }

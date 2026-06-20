@@ -24,7 +24,7 @@ public class OnboardingController {
 
     @GetMapping("/welcome")
     public String showWelcome(Principal principal) {
-        if (principal.getName()==null)
+        if (principal==null)
             return "redirect:/authorization/login";
         Users users = onboardingService.findByEmail(principal.getName());
         return users.getGoals()==null?"welcomePage":"redirect:/dashboard/home";
