@@ -4,6 +4,7 @@ import com.torloksz.arethium.dto.LoginDTO;
 import com.torloksz.arethium.dto.MessageDTO;
 import com.torloksz.arethium.dto.RegisterDTO;
 import com.torloksz.arethium.service.AuthService;
+import com.torloksz.arethium.session.UserSession;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class AuthController {
 
 
     private final AuthService authService;
+    private final UserSession userSession;
 
 
     @PostMapping("/register")
@@ -51,6 +53,7 @@ public class AuthController {
 
         if (messageDTO.message().contains("Success")) {
             if (messageDTO.message().contains("true")){
+                userSession.init(loginDTO.email());
                 return "redirect:/dashboard/home";
             }
             else

@@ -12,7 +12,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Goals {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

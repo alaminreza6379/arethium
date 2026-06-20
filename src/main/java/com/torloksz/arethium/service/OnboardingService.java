@@ -6,6 +6,7 @@ import com.torloksz.arethium.entity.Goals;
 import com.torloksz.arethium.entity.Users;
 import com.torloksz.arethium.repository.GoalsRepository;
 import com.torloksz.arethium.repository.UsersRepository;
+import com.torloksz.arethium.session.UserSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,16 @@ public class OnboardingService {
 
     private final GoalsRepository goalsRepository;
     private final UsersRepository usersRepository;
+    private final UserSession userSession;
 
     public Users findByEmail(String email) {
         return usersRepository.findByEmail(email).get();
     }
 
+
+    public Users getUserSession() {
+        return userSession.getUser();
+    }
 
     @Transactional
     public MessageDTO saveUserGoals(String email, GoalsDTO goalsDTO) {

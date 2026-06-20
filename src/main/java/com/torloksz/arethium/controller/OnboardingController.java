@@ -23,11 +23,11 @@ public class OnboardingController {
     private final OnboardingService onboardingService;
 
     @GetMapping("/welcome")
-    public String showWelcome(Principal principal) {
-        if (principal==null)
+    public String showWelcome() {
+        Users user = onboardingService.getUserSession();
+        if(user==null)
             return "redirect:/authorization/login";
-        Users users = onboardingService.findByEmail(principal.getName());
-        return users.getGoals()==null?"welcomePage":"redirect:/dashboard/home";
+        return user.getGoals()==null?"welcomePage":"redirect:/dashboard/home";
     }
 
     @GetMapping("/goals")
@@ -37,8 +37,14 @@ public class OnboardingController {
     }
 
     @PostMapping("/goals")
-    public String showGoalsForm(@Valid @ModelAttribute GoalsDTO goalsDTO,Principal principal) {
-        MessageDTO messageDTO = onboardingService.saveUserGoals(principal.getName(), goalsDTO);
+    public String showGoalsForm(@Valid @ModelAttribute GoalsDTO goalsDTO) {
+
+        Users user = onboardingService.getUserSession();
+        if(user==null)
+            return "redirect:/authorization/login";
+
+        MessageDTO messageDTO = onboardingService.saveUserGoals(user.getEmail(), goalsDTO);
+
         return messageDTO.message().contains("Success")?"redirect:/dashboard/home":"redirect:/onboarding/goals";
     }
 

@@ -21,14 +21,10 @@ public class SecurityConfig {
                         .maximumSessions(1) // Prevents multiple logins for one account
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/authorization/**", "/css/**", "/images/**").permitAll()
+                        .requestMatchers( "/**","/css/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/authorization/login")
-                        .defaultSuccessUrl("/dashboard/home", true) // Redirect after native login
-                        .permitAll()
-                )
+                .formLogin(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout
                         .logoutUrl("/authorization/logout")
                         .invalidateHttpSession(true)
