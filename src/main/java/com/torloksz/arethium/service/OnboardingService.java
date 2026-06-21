@@ -71,7 +71,8 @@ public class OnboardingService {
                 modulesRepository.save(modules);
             }
         } catch (Exception e) {
-            throw new RuntimeException("Unexpected Error");
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

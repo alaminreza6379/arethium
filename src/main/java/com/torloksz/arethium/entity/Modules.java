@@ -18,7 +18,7 @@ public class Modules {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer order;
+    private Integer moduleOrder;
 
     private String title;
 
@@ -32,7 +32,7 @@ public class Modules {
     private Users users;
 
     public Modules(Users users,Integer order,String title,String description,boolean completed){
-        this.order=order;
+        this.moduleOrder=order;
         this.title = title;
         this.description=description;
         this.users=users;

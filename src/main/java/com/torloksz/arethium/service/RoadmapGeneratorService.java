@@ -15,21 +15,22 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class RoadmapGeneratorService {
 
-    @Value("${gemini.api.key}")
-    private String apiKey;
+    private final String apiKey = System.getenv("GEMINI_API_KEY") != null
+            ? System.getenv("GEMINI_API_KEY")
+            : System.getProperty("gemini.api.key");
 
     public String generateRoadmap(String targetRole , String targetCompany) throws HttpException, IOException {
         Client client = new Client.Builder().apiKey(apiKey).build();
 
         String prompt = String.format(
-                "You are an expert career mentor. Generate a roadmap for a %s role at %s. " +
+                "You are an expert career mentor. Generate a roadmap for a %s role at %s. and listen i want at least 12 modules to be built and of quality what skills is needed" +
                         "Return ONLY valid JSON that maps to this structure: " +
                         "{\"modules\": [{\"order\": 1, \"title\": \"...\", \"description\": \"...\"}]}. " +
                         "Do not include any introductory text or markdown formatting.",
                 targetRole,targetCompany
         );
 
-        GenerateContentResponse response = client.models.generateContent("gemini-1.5-flash",prompt,null);
+        GenerateContentResponse response = client.models.generateContent("gemini-2.5-flash",prompt,null);
         return response.text();
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ModulesRepository extends JpaRepository<Modules,Long> {
-    List<Modules> findByUsersIdOrderByModulesOrderAsc(Long users_id);
+    List<Modules> findByUsersIdOrderByModuleOrder(Long users_id);
+    @Transactional
     void deleteByUsers(Users users);
 }

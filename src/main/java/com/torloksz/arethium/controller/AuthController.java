@@ -79,7 +79,7 @@ public class AuthController {
 
     @PostMapping("/logout")
     public String logout() {
-        userSession.setUser(new Users());
+        userSession.setUser(null);
         return "redirect:/authorization/login";
     }
 }
