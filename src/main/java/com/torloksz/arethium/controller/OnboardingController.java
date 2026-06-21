@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,11 +39,13 @@ public class OnboardingController {
     }
 
     @PostMapping("/goals")
-    public String showGoalsForm(@Valid @ModelAttribute GoalsDTO goalsDTO) {
+    public String showGoalsForm(@Valid @ModelAttribute GoalsDTO goalsDTO, BindingResult bindingResult) {
 
         Users user = onboardingService.getUserSession();
         if(user==null)
             return "redirect:/authorization/login";
+        if(bindingResult.hasErrors())
+            return "redirect:/onboarding/goals";
 
         MessageDTO messageDTO = onboardingService.saveUserGoals(user.getEmail(), goalsDTO);
 

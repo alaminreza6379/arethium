@@ -34,7 +34,7 @@ public class AuthService {
             if(!isEmail(registerDTO.email()))
                 return new MessageDTO("Email format should be proper...");
             usersRepository.save(new Users(registerDTO,passwordEncoder().encode(registerDTO.password())));
-            return new MessageDTO("Registration is successful..");
+            return new MessageDTO("Success Registration is successful..");
         } catch (Exception e) {
             throw new RuntimeException("Details provided do not meet the requirement of information we want..");
         }

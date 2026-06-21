@@ -38,7 +38,7 @@ public class AuthController {
             userSession.init(registerDTO.email());
             return "redirect:/onboarding/welcome";
         }
-        return "redirect:/authorization/login";
+        return "redirect:/authorization/register";
     }
 
     @PostMapping("/login")

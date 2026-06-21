@@ -32,8 +32,10 @@ public class Users {
     @NotBlank(message = "Password can't be blank")
     private String password;
 
-    @OneToOne
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
     private Goals goals;
+
+
     public Users(RegisterDTO registerDTO,String password) {
         this.name = registerDTO.name();
         this.email = registerDTO.email();

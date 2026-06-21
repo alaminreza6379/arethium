@@ -61,6 +61,16 @@ body {
     font-size: 0.9rem;
 }
 
+#redirect {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(142, 220, 177, 0.2); /* Light red for error */
+    color: #595bc1;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
 h1{
     font-weight: bold;
     font-family: "Inter Semi Bold", ui-monospace;

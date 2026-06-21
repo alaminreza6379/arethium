@@ -35,10 +35,9 @@ public class OnboardingService {
                 return new MessageDTO("Please Select your targetRole..");
             if (goalsDTO.targetCompany() == null)
                 return new MessageDTO("Please Select your targetCompany..");
-            Users user = usersRepository.findByEmail(email).orElseThrow();
+            Users user = usersRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User Not Found"));
             Goals goals = new Goals(goalsDTO.targetRole(), goalsDTO.targetCompany());
-            goals = goalsRepository.save(goals);
-
+            goals.setUsers(user);
             user.setGoals(goals);
             usersRepository.save(user);
             return new MessageDTO("Success");
