@@ -1,5 +1,4 @@
 body {
-    /* Atmospheric dark gradient background */
     background: linear-gradient(135deg, #1a2a6c, #2e6370, #0e3642);
     background-size: cover;
     height: 100vh;
@@ -10,7 +9,6 @@ body {
 }
 
 .auth-container {
-    /* The Glass Effect */
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -31,7 +29,7 @@ body {
     padding: 12px;
     margin-bottom: 1rem;
     width: 100%;
-    border-radius: 50px; /* Rounded pill shape */
+    border-radius: 50px;
     box-sizing: border-box;
 }
 
@@ -55,7 +53,7 @@ body {
     margin-top: 15px;
     padding: 10px;
     border-radius: 5px;
-    background: rgba(231, 76, 60, 0.2); /* Light red for error */
+    background: rgba(231, 76, 60, 0.2);
     color: #ff7675;
     text-align: center;
     font-size: 0.9rem;
@@ -65,8 +63,8 @@ body {
     margin-top: 15px;
     padding: 10px;
     border-radius: 5px;
-    background: rgba(142, 220, 177, 0.2); /* Light red for error */
-    color: #595bc1;
+    background: rgb(46, 99, 112);
+    color: #154049;
     text-align: center;
     font-size: 0.9rem;
 }
@@ -74,7 +72,7 @@ body {
 h1{
     font-weight: bold;
     font-family: "Inter Semi Bold", ui-monospace;
-    color: #267a5f;
+    color: #092a32;
     font-size: larger;
 }
 
@@ -91,7 +89,6 @@ h1{
     margin-bottom: 10px;
 }
 
-/* The horizontal line */
 .progress-bar::before {
     content: '';
     position: absolute;
@@ -119,7 +116,7 @@ h1{
 }
 
 .step.active {
-    background: #6c5ce7; /* Your primary brand color */
+    background: #5cdbe7;
     border-color: #a29bfe;
 }
 
@@ -167,7 +164,7 @@ h1{
 
 .custom-select select:focus {
     outline: none;
-    border-color: #6c5ce7;
+    border-color: #296b78;
     background: rgba(255, 255, 255, 0.15);
 }
 
@@ -175,4 +172,9 @@ h1{
 .custom-select select option {
     background: #2d3436; /* Dark background for options */
     color: white;
+}
+
+a{
+    text-decoration: none;
+    color: #8acbda;
 }

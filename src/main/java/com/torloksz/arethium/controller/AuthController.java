@@ -3,6 +3,7 @@ package com.torloksz.arethium.controller;
 import com.torloksz.arethium.dto.LoginDTO;
 import com.torloksz.arethium.dto.MessageDTO;
 import com.torloksz.arethium.dto.RegisterDTO;
+import com.torloksz.arethium.entity.Users;
 import com.torloksz.arethium.service.AuthService;
 import com.torloksz.arethium.session.UserSession;
 import jakarta.servlet.http.HttpServletRequest;
@@ -74,5 +75,11 @@ public class AuthController {
     public String showLoginForm(Model model) {
         model.addAttribute("loginDTO",new LoginDTO("",""));
         return "loginPage";
+    }
+
+    @PostMapping("/logout")
+    public String logout() {
+        userSession.setUser(new Users());
+        return "redirect:/authorization/login";
     }
 }

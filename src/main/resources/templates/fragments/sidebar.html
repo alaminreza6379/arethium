@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/dashboard.css}">
+    <link rel="stylesheet" type="text/css" th:href='https://www.unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
+</head>
+<body>
+<div>
+    <nav class="sidebar">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../../static/images/logo.png" alt="logo_image">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">Arethium</span>
+                    <span class="tag">Road To Role</span>
+                </div>
+            </div>
+
+            <i class="bx bx-caret-big-right bx-tada toggle"></i>
+
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                    <i class="bxf bx-search-alt"></i>
+                    <input type="search" placeholder="Search">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a th:href="#">
+                            <i class="bxf bx-home"></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a th:href="#">
+                            <i class="bxf bx-route"></i>
+                            <span class="text nav-text">Roadmap</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a th:href="#">
+                            <i class="bxf bx-treasure-chest"></i>
+                            <span class="text nav-text">Assessments</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a th:href="#">
+                            <i class="bxf bx-monitor-wide"></i>
+                            <span class="text nav-text">Interviews</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
