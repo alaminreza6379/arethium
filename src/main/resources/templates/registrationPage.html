@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <head>
-        <title>Arethium - Registration Page</title>
-        <link rel="stylesheet" type="text/css" th:href="@{/css/auth.css}" />
-    </head>
+    <title>Arethium - Registration Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/auth.css}" />
 </head>
 <body>
 <div class="auth-container">
@@ -20,7 +18,7 @@
         <div th:if="${message}" id="message">
             <p th:text="${message}"></p>
         </div>
-        <p>If Registered.</p><p id="redirect"><a href="http://localhost:8080/authorization/login">LogIn</a> </p>
+        <p>If Registered.</p><p id="redirect"><a th:href="@{/authorization/login}">LogIn</a> </p>
     </form>
 </div>
 </body>
