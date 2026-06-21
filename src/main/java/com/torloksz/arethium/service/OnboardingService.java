@@ -15,7 +15,7 @@ import com.torloksz.arethium.session.UserSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import tools.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
@@ -50,8 +50,8 @@ public class OnboardingService {
             Goals goals = new Goals(goalsDTO.targetRole(), goalsDTO.targetCompany());
             goals.setUsers(user);
             user.setGoals(goals);
-            generateAndSaveRoadmap(user, goalsDTO.targetRole(), goalsDTO.targetCompany());
             usersRepository.save(user);
+            generateAndSaveRoadmap(user, goalsDTO.targetRole(), goalsDTO.targetCompany());
             return new MessageDTO("Success");
         } catch (RuntimeException e) {
             throw new RuntimeException("Unexpected Error Occurred;");
@@ -60,7 +60,9 @@ public class OnboardingService {
 
     public void generateAndSaveRoadmap(Users user,String targetRole,String targetCompany){
         try{
+            modulesRepository.deleteByUsers(user);
             String json = geminiService.generateRoadmap(targetRole,targetCompany);
+            System.out.println(json);
             String cleanJson = json.replaceAll("```json|```", "").trim();
             RoadmapResponseDTO roadmap = objectMapper.readValue(cleanJson,RoadmapResponseDTO.class);
 
