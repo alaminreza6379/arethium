@@ -14,7 +14,6 @@ import java.util.Objects;
 
 @Service
 public class InterviewGeneratorService {
-
     private final String apiKey = System.getenv("GEMINI_API_KEY") != null
             ? System.getenv("GEMINI_API_KEY")
             : System.getProperty("gemini.api.key");
@@ -51,7 +50,6 @@ public class InterviewGeneratorService {
     ) {
         try {
             Client client = new Client.Builder().apiKey(apiKey).build();
-
             String prompt =
                     """
                     You are a senior Google interviewer.
@@ -67,8 +65,7 @@ public class InterviewGeneratorService {
                     Answers:
                     """ + answers;
 
-            GenerateContentResponse response = client.models.generateContent("gemini-1.5-flash", prompt, null
-            );
+            GenerateContentResponse response = client.models.generateContent("gemini-2.5-flash", prompt, null);
 
             String clean = Objects.requireNonNull(response.text()).replaceAll("```json|```", "").trim();
 

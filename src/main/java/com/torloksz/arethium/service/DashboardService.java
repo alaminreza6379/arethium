@@ -4,10 +4,7 @@ package com.torloksz.arethium.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.torloksz.arethium.dto.*;
-import com.torloksz.arethium.entity.Assessment;
-import com.torloksz.arethium.entity.Modules;
-import com.torloksz.arethium.entity.Questions;
-import com.torloksz.arethium.entity.Users;
+import com.torloksz.arethium.entity.*;
 import com.torloksz.arethium.repository.AssessmentRepository;
 import com.torloksz.arethium.repository.InterviewRepository;
 import com.torloksz.arethium.repository.ModulesRepository;
@@ -164,9 +161,13 @@ public class DashboardService {
         return score;
     }
 
-    public java.util.List<String> generateInterview() {
+    public List<String> generateInterview() {
         Users user = userSession.getUser();
         try {
+            if (interviewRepository.findByUsers(user).isPresent()) {
+                Interview interview = interviewRepository.findByUsers(user).get();
+                interviewRepository.delete(interview);
+            }
             String json = interviewGeneratorService.generateQuestions(user.getGoals().getTargetRole());
             String clean = json.replaceAll("```json|```", "").trim();
 
