@@ -11,9 +11,8 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class AssessmentGenerator {
-    private final String apiKey = System.getenv("GEMINI_API_KEY") != null
-            ? System.getenv("GEMINI_API_KEY")
-            : System.getProperty("gemini.api.key");
+    @Value("${GEMINI_API_KEY}")
+    private String apiKey;
 
     public String generateAssessment(String description,String title) throws HttpException, IOException {
         Client client = new Client.Builder().apiKey(apiKey).build();
