@@ -231,49 +231,6 @@ session/
 
 ---
 
-# 📸 Screenshots
-
-### Login Page
-
-![Login](docs/screenshots/login.png)
-
-### Goal Selection
-
-![Goals](docs/screenshots/goals.png)
-
-### Dashboard
-
-![Dashboard](docs/screenshots/dashboard.png)
-
-### Roadmap
-
-![Roadmap](docs/screenshots/roadmap.png)
-
-### Assessment
-
-![Assessment](docs/screenshots/assessment.png)
-
-### Interview
-
-![Interview](docs/screenshots/interview.png)
-
----
-
-# 🎥 Demo Video
-
-Project Demonstration:
-
-```text
-Add YouTube / Drive Link Here
-```
-
-Presentation Slides:
-
-```text
-Add PPT Link Here
-```
-
----
 
 # 🚀 Installation
 
