@@ -177,7 +177,7 @@ Career Readiness Score
 | Spring Boot       | Backend Framework     |
 | Spring Data JPA   | Data Access           |
 | Hibernate         | ORM                   |
-| MySQL             | Database              |
+| PostgreSQL        | Database              |
 | Thymeleaf         | Server-Side Rendering |
 | Google Gemini API | AI Generation         |
 | Maven             | Dependency Management |
