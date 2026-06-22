@@ -14,10 +14,8 @@ import java.util.Objects;
 
 @Service
 public class InterviewGeneratorService {
-    private final String apiKey = System.getenv("GEMINI_API_KEY") != null
-            ? System.getenv("GEMINI_API_KEY")
-            : System.getProperty("gemini.api.key");
-
+    @Value("${GEMINI_API_KEY}")
+    private String apiKey;
     public String generateQuestions(String role) throws HttpException, IOException {
         Client client = new Client.Builder().apiKey(apiKey).build();
 
