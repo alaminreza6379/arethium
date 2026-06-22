@@ -29,7 +29,9 @@ public class RoadmapGeneratorService {
                         "2. For each module, provide: order (int), title (string), description (string), and estimatedWeeks (int). " +
                         "3. Return ONLY valid JSON that maps to this structure: " +
                         "{\"modules\": [{\"order\": 1, \"title\": \"...\", \"description\": \"...\", \"estimatedWeeks\": 0}]}. " +
-                        "Do not include any introductory text, explanations, or markdown code blocks.",
+                        "Do not include any introductory text, explanations, or markdown code blocks."+
+                        "Include some youtube vido links which are the best ones in title and provide full link or name of the youtube"+
+                        "Channel which teaches in best way in english...",
                 targetRole, targetCompany
         );
 
