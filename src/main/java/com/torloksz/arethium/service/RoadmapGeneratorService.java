@@ -23,11 +23,14 @@ public class RoadmapGeneratorService {
         Client client = new Client.Builder().apiKey(apiKey).build();
 
         String prompt = String.format(
-                "You are an expert career mentor. Generate a roadmap for a %s role at %s. and listen i want at least 12 modules to be built and of quality what skills is needed" +
-                        "Return ONLY valid JSON that maps to this structure: " +
-                        "{\"modules\": [{\"order\": 1, \"title\": \"...\", \"description\": \"...\"}]}. " +
-                        "Do not include any introductory text or markdown formatting.",
-                targetRole,targetCompany
+                "You are an expert career mentor. Generate a detailed learning roadmap for a %s role at %s. " +
+                        "Requirements: " +
+                        "1. Create exactly 10 high-quality modules. " +
+                        "2. For each module, provide: order (int), title (string), description (string), and estimatedWeeks (int). " +
+                        "3. Return ONLY valid JSON that maps to this structure: " +
+                        "{\"modules\": [{\"order\": 1, \"title\": \"...\", \"description\": \"...\", \"estimatedWeeks\": 0}]}. " +
+                        "Do not include any introductory text, explanations, or markdown code blocks.",
+                targetRole, targetCompany
         );
 
         GenerateContentResponse response = client.models.generateContent("gemini-2.5-flash",prompt,null);

@@ -1,0 +1,47 @@
+.hero-card {
+    background: linear-gradient(135deg, #285e6e, #367298);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 1.5rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the text */
+}
+
+.stat span {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+.stat strong {
+    font-size: 1.5rem;
+}
+.progress-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(#206a77 20%, #e0e0e0 0deg);
+}
+
+.progress-circle::before {
+    content: "";
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: white;
+}

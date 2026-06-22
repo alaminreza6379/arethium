@@ -67,7 +67,7 @@ public class OnboardingService {
             RoadmapResponseDTO roadmap = objectMapper.readValue(cleanJson,RoadmapResponseDTO.class);
 
             for(ModuleResponseDTO m : roadmap.modules()){
-                Modules modules = new Modules(user,m.order(),m.title(),m.description(),false);
+                Modules modules = new Modules(user,m.order(),m.title(),m.description(),false,m.time());
                 modulesRepository.save(modules);
             }
         } catch (Exception e) {

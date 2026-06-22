@@ -27,15 +27,20 @@ public class Modules {
 
     private boolean completed;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Integer time;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private Users users;
 
-    public Modules(Users users,Integer order,String title,String description,boolean completed){
+    public Modules(Users users,Integer order,String title,String description,boolean completed,Integer time){
         this.moduleOrder=order;
         this.title = title;
         this.description=description;
         this.users=users;
         this.completed=completed;
+        this.time=time;
     }
+
+
 }

@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -34,6 +36,9 @@ public class Users {
 
     @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
     private Goals goals;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<Modules> modules;
 
 
     public Users(RegisterDTO registerDTO,String password) {

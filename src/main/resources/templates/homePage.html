@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Arethium - Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+    <link rel="stylesheet"
+          href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+</head>
+<body>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+<section class="home">
+    <div class="hero-card">
+        <div class="hero-header">
+            <h2 th:text="|${targetRole} @ ${targetCompany}|"></h2>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-circle" th:style="'--p: ' + ${readiness} + '%'">
+                <div style="position: absolute; text-align: center;">
+                    <strong th:text="${readiness} + '/100'"></strong>
+                </div>
+            </div>
+            <div>
+                <p>Career Readiness Score</p>
+                <h3 th:text="'Rank ' + ${rank}"></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="module-lists">
+        <div>
+            <h3>Completed</h3>
+            <ul>
+                <li th:each="m : ${modules}" th:if="${m.isCompleted()}" th:text="${m.moduleName}"></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Needs Improvement</h3>
+            <ul>
+                <li th:each="m : ${modules}" th:if="${!m.isCompleted()}" th:text="${m.moduleName}"></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script th:src="@{/js/sidebar.js}"></script>
+</body>
+</html>

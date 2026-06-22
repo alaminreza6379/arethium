@@ -16,4 +16,8 @@ public class UserSession {
     public void init(String email) {
         this.user = usersRepository.findByEmail(email).get();
     }
+    public void init(String email, UsersRepository userRepository) {
+        this.user = userRepository.findByEmailWithModules(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }

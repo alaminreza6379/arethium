@@ -46,6 +46,7 @@ body.dark .sidebar header .toggle{
     padding: 20px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
+    border-radius: 10px;
 }
 
 .sidebar.close {
@@ -125,10 +126,11 @@ header .image-text .header-text {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    border-radius: 40%;
     color: var(--sidebar-color);
     font-size: 22px;
     transition: var(--tran-03);
+
 }
 
 .sidebar.close header .toggle {
@@ -249,6 +251,7 @@ body.dark .switch::before {
     width: calc(100% - 250px);
     background: var(--body-color);
     transition: var(--tran-03);
+    padding: 5px;
 }
 
 .sidebar.close ~ .home {
