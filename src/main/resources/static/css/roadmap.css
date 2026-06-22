@@ -1,0 +1,23 @@
+.simple-list {
+    list-style: none;
+    padding: 0;
+}
+
+.simple-list li {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.simple-list li span.done {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Optional: Make the checkbox look a bit better */
+input[type="checkbox"] {
+    cursor: pointer;
+    transform: scale(1.2);
+}

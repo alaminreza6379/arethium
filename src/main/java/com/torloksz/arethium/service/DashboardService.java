@@ -77,4 +77,14 @@ public class DashboardService {
         return modulesRepository.findByUsersId(user.getId());
     }
 
+    public List<Modules> getModules() {
+        return modulesRepository.findByUsersId(userSession.getUser().getId());
+    }
+
+    public void toggleModule(Long id) {
+        Modules modules = modulesRepository.findModulesById(id);
+        modules.setCompleted(true);
+        modulesRepository.save(modules);
+    }
+
 }

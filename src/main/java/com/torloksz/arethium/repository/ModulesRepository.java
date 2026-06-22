@@ -16,4 +16,6 @@ public interface ModulesRepository extends JpaRepository<Modules,Long> {
 
     @Transactional
     void deleteByUsers(Users users);
+
+    Modules findModulesById(Long id);
 }

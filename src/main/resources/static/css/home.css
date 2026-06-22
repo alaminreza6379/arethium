@@ -38,3 +38,9 @@
 body.dark {
     color: navajowhite;
 }
+
+.module-lists li {
+    box-sizing: border-box;
+    height: 19px;
+
+}

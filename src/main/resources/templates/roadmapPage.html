@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Arethium - Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/roadmap.css}">
+    <link rel="stylesheet"
+          href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+</head>
+<body>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+<section class="home">
+    <div class="hero-card">
+            <h2>Roadmap</h2>
+    </div>
+
+    <ul class="module-list">
+        <li th:each="m : ${modules}" th:classappend="${m.isCompleted} ? 'completed-box' : 'pending-box'">
+            <form th:action="@{/dashboard/roadmap/toggle-modules/{id}(id=${m.id})}" method="post" style="display:inline;">
+                <button type="submit" class="toggle-btn">
+                    <span th:text="${m.title}"></span>
+                </button>
+            </form>
+        </li>
+    </ul>
+</section>
+<script th:src="@{/js/sidebar.js}"></script>
+</body>
+</html>
