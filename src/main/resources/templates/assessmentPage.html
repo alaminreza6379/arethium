@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assessment - Arethium</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/assessment.css}">
+</head>
+<body>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<section class="home">
+    <div class="assessment-container">
+        <h2>Assessment: <span th:text="${module.title}"></span></h2>
+
+        <form th:action="@{/dashboard/assessment/submit/{id}(id=${module.id})}" method="post">
+            <div th:each="q, iter : ${questions}" class="question-card">
+                <p class="question-text" th:text="${iter.count} + '. ' + ${q.question}"></p>
+
+                <div class="options">
+                    <label><input type="radio" th:name="'q' + ${q.id}" value="A" required> <span th:text="${q.optionA}"></span></label>
+                    <label><input type="radio" th:name="'q' + ${q.id}" value="B"> <span th:text="${q.optionB}"></span></label>
+                    <label><input type="radio" th:name="'q' + ${q.id}" value="C"> <span th:text="${q.optionC}"></span></label>
+                    <label><input type="radio" th:name="'q' + ${q.id}" value="D"> <span th:text="${q.optionD}"></span></label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Assessment</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

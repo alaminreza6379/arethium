@@ -17,21 +17,19 @@
     </div>
 
     <ul class="roadmap-list">
-        <!-- Using the 'completed' field directly from your Java entity -->
-        <li th:each="m : ${modules}"
-            th:classappend="${m.isCompleted} ? 'completed-box' : 'pending-box'">
+        <li th:each="m : ${modules}">
+            <div class="module-card">
+                <i th:class="${m.isCompleted} ? 'bx bxs-check-circle' : 'bx bx-circle'"></i>
 
-            <form th:action="@{/dashboard/roadmap/toggle-module/{id}(id=${m.id})}" method="post">
-                <button type="submit" class="toggle-btn">
-                    <div class="module-info">
-                        <i th:class="${m.isCompleted} ? 'bx bxs-check-circle' : 'bx bx-circle'"></i>
-                        <span th:text="${m.title}">Module Title</span>
-                        <div class="module-info">
-                            <span th:text="${m.description}" class="sub">Module Description</span>
-                        </div>
-                    </div>
-                </button>
-            </form>
+                <div class="module-info">
+                    <span class="title" th:text="${m.title}">Module Title</span>
+                    <span class="description" th:text="${m.description}">Description</span>
+                </div>
+
+                <a th:href="@{/dashboard/assessment/{id}(id=${m.id})}" class="assessment-link">
+                    <span th:text="${m.isCompleted} ? 'Review Quiz' : 'Start Assessment'"></span>
+                </a>
+            </div>
         </li>
     </ul>
 </section>

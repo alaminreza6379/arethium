@@ -42,8 +42,9 @@ public class OnboardingService {
     @Transactional
     public MessageDTO saveUserGoals(String email, GoalsDTO goalsDTO) {
         try {
-            if(goalsDTO!=null) 
+            if(goalsDTO!=null)
                 goalsRepository.delete(new Goals(goalsDTO.targetRole(), goalsDTO.targetCompany()));
+            assert goalsDTO != null;
             if (goalsDTO.targetRole() == null)
                 return new MessageDTO("Please Select your targetRole..");
             if (goalsDTO.targetCompany() == null)
@@ -64,7 +65,6 @@ public class OnboardingService {
         try{
             modulesRepository.deleteByUsers(user);
             String json = geminiService.generateRoadmap(targetRole,targetCompany);
-            System.out.println(json);
             String cleanJson = json.replaceAll("```json|```", "").trim();
             RoadmapResponseDTO roadmap = objectMapper.readValue(cleanJson,RoadmapResponseDTO.class);
 

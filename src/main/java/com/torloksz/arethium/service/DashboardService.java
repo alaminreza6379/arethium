@@ -1,25 +1,35 @@
 package com.torloksz.arethium.service;
 
-import com.torloksz.arethium.dto.MessageDTO;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.torloksz.arethium.dto.*;
+import com.torloksz.arethium.entity.Assessment;
 import com.torloksz.arethium.entity.Modules;
+import com.torloksz.arethium.entity.Questions;
 import com.torloksz.arethium.entity.Users;
+import com.torloksz.arethium.repository.AssessmentRepository;
 import com.torloksz.arethium.repository.ModulesRepository;
+import com.torloksz.arethium.repository.QuestionsRepository;
 import com.torloksz.arethium.session.UserSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.http.HttpException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import tools.jackson.databind.ObjectMapper;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class DashboardService {
 
     private final UserSession userSession;
+    private final ObjectMapper objectMapper;
     Model model;
     private final ModulesRepository modulesRepository;
+    private final AssessmentRepository assessmentRepository;
+    private final AssessmentGenerator assessmentGenerator;
+    private final QuestionsRepository questionsRepository;
 
     public MessageDTO isUserSessionRunning() {
         Users users = userSession.getUser();
@@ -83,8 +93,71 @@ public class DashboardService {
 
     public void toggleModule(Long id) {
         Modules modules = modulesRepository.findModulesById(id);
+        if (assessmentRepository.findAssessmentsByModulesId(id).isEmpty())
+            generateAssessment(id);
+        if (!assessmentRepository.findAssessmentsByModulesId(id).get().getPassed())
+            return;
         modules.setCompleted(true);
         modulesRepository.save(modules);
+    }
+
+    public void generateAssessment(Long id) {
+        try{
+            if (assessmentRepository.findAssessmentsByModulesId(id).isPresent())
+                return;
+            String json = assessmentGenerator.generateAssessment(modulesRepository.findModulesById(id).getDescription(),
+                    modulesRepository.findModulesById(id).getTitle());
+            String cleanJson = json.replaceAll("```json|```","").trim();
+            AssessmentsResponseDTO questions = objectMapper.readValue(cleanJson, AssessmentsResponseDTO.class);
+
+            Assessment assessment = new Assessment();
+            assessment.setModules(modulesRepository.findModulesById(id));
+            assessment.setPassed(false);
+            assessment.setScore(0.0);
+            assessmentRepository.save(assessment);
+
+            for(QuestionsDTO q : questions.questions()){
+                Questions question = new Questions(q.question(),q.optionA(),q.optionB(),q.optionC(),q.optionD(),q.correctAnswer());
+                question.setAssessment(assessment);
+                questionsRepository.save(question);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public List<Questions> takeAssessment(Long id){
+        return assessmentRepository.findAssessmentsByModulesId(id).get().getQuestions();
+    }
+
+    public Modules getModule(Long id) {
+        return modulesRepository.findModulesById(id);
+    }
+
+    public double calculateScore(Long id,Map<String, String> answers) {
+        List<Questions> questions = assessmentRepository.findAssessmentsByModulesId(id).get().getQuestions();
+        int correct = 0;
+
+        for(Questions question : questions) {
+            String ans = answers.get("q"+ question.getId());
+            if (ans!=null && ans.equals(question.getCorrectAnswer()))
+                correct++;
+        }
+
+        double score = (((double) correct/ questions.size())*100);
+        Assessment assessment = assessmentRepository.getAssessmentByModulesId(id);
+        assessment.setScore(score);
+        assessment.setPassed(score>=85.0);
+        assessmentRepository.save(assessment);
+
+        if (assessment.getPassed()){
+            Modules module = modulesRepository.findModulesById(id);
+            module.setCompleted(true);
+            modulesRepository.save(module);
+        }
+
+        return score;
     }
 
 }

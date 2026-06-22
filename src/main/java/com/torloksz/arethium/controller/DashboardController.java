@@ -6,10 +6,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -46,6 +43,28 @@ public class DashboardController {
     public String toggleModule(@PathVariable Long id) {
         dashboardService.toggleModule(id);
         return "redirect:/dashboard/roadmap";
+    }
+
+
+    @GetMapping("/assessment/{id}")
+    public String getAssessment(@PathVariable Long id,Model model) {
+        MessageDTO messageDTO = dashboardService.isUserSessionRunning();
+        if(!messageDTO.message().contains("Success"))
+            return "redirect:/authorization/login";
+
+        model.addAttribute("questions",dashboardService.takeAssessment(id));
+        model.addAttribute("module",dashboardService.getModule(id));
+        return "assessmentPage";
+    }
+    @PostMapping("/assessment/submit/{id}")
+    public String submitAssessment(@PathVariable Long id, @RequestParam Map<String, String> allParams, Model model) {
+        MessageDTO messageDTO = dashboardService.isUserSessionRunning();
+        if(!messageDTO.message().contains("Success"))
+            return "redirect:/authorization/login";
+
+        double score = dashboardService.calculateScore(id, allParams);
+        model.addAttribute("score", score);
+        return "resultPage";
     }
 
 }

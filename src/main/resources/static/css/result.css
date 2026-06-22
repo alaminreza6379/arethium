@@ -1,0 +1,33 @@
+.result-container { display: flex; justify-content: center; padding: 50px; }
+
+.result-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Score Circle */
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px auto;
+    border: 8px solid #ddd;
+}
+
+/* State Colors */
+.result-card.passed .score-circle { border-color: #48bb78; color: #48bb78; }
+.result-card.failed .score-circle { border-color: #f56565; color: #f56565; }
+
+/* Buttons */
+.btn-primary { background: #367298; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-block; }
+.btn-secondary { background: #edf2f7; color: #4a5568; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-block; margin-right: 10px; }

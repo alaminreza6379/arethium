@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/result.css}">
+</head>
+<body>
+<div class="result-container">
+    <div class="result-card" th:classappend="${score >= 70} ? 'passed' : 'failed'">
+        <h2 th:text="${score >= 70} ? 'Congratulations!' : 'Keep Practicing'">Status</h2>
+        <div class="score-circle">
+            <span th:text="${#numbers.formatDecimal(score, 1, 0)} + '%'">0%</span>
+        </div>
+        <p th:text="${score >= 70} ? 'You have mastered this module.' : 'You did not meet the passing criteria.'"></p>
+
+        <div class="actions">
+            <a href="/dashboard/roadmap" class="btn-secondary">Back to Roadmap</a>
+            <a th:if="${score < 70}" th:href="@{/dashboard/assessment/{id}(id=${moduleId})}" class="btn-primary">Retry Assessment</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
