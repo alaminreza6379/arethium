@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Arethium - Interview</title>
+    <link rel="stylesheet" th:href="@{/css/interview.css}">
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<section class="home">
+    <div class="container">
+        <h1>Mock Interview</h1>
+
+        <form method="post" th:action="@{/dashboard/interview/submit}">
+
+            <div th:each="q, iter : ${questions}">
+                <div class="question-card">
+                    <h3>Question <span th:text="${iter.index + 1}"></span></h3>
+                    <p th:text="${q}"></p>
+
+                    <textarea name="answers" rows="5" placeholder="Type your answer"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Submit Interview</button>
+
+        </form>
+    </div>
+</section>
+
+<script th:src="@{/js/sidebar.js}"></script>
+</body>
+</html>

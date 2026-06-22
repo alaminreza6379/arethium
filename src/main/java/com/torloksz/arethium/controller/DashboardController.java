@@ -2,12 +2,14 @@ package com.torloksz.arethium.controller;
 
 import com.torloksz.arethium.dto.MessageDTO;
 import com.torloksz.arethium.service.DashboardService;
+import com.torloksz.arethium.service.InterviewGeneratorService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -16,6 +18,7 @@ import java.util.Map;
 public class DashboardController {
 
     private final DashboardService dashboardService;
+    private final InterviewGeneratorService interviewGeneratorService;
 
     @GetMapping("/home")
     @Transactional
@@ -67,4 +70,21 @@ public class DashboardController {
         return "resultPage";
     }
 
+    @GetMapping("/interview")
+    public String interviewPage(Model model){
+        MessageDTO messageDTO = dashboardService.isUserSessionRunning();
+        if(!messageDTO.message().contains("Success"))
+            return "redirect:/authorization/login";
+
+        model.addAttribute("questions", dashboardService.generateInterview());
+
+        return "interviewPage";
+    }
+
+    @PostMapping("/interview/submit")
+    public String submitInterview(@RequestParam List<String> answers, Model model){
+        Integer score = interviewGeneratorService.evaluateAnswers(answers);
+        model.addAttribute("score", score);
+        return "interviewResult";
+    }
 }

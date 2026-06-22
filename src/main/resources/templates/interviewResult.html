@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Arethium - Interview Result</title>
+</head>
+<body>
+<link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+<section class="home">
+    <div class="result-container">
+        <h1>Interview Score</h1>
+        <h2 class="score-display" th:text="${score} + '/100'"></h2>
+    </div>
+</section>
+</body>
+</html>

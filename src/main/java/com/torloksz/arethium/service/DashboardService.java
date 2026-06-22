@@ -1,12 +1,15 @@
 package com.torloksz.arethium.service;
 
+
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.torloksz.arethium.dto.*;
 import com.torloksz.arethium.entity.Assessment;
 import com.torloksz.arethium.entity.Modules;
 import com.torloksz.arethium.entity.Questions;
 import com.torloksz.arethium.entity.Users;
 import com.torloksz.arethium.repository.AssessmentRepository;
+import com.torloksz.arethium.repository.InterviewRepository;
 import com.torloksz.arethium.repository.ModulesRepository;
 import com.torloksz.arethium.repository.QuestionsRepository;
 import com.torloksz.arethium.session.UserSession;
@@ -14,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.*;
@@ -30,6 +32,8 @@ public class DashboardService {
     private final AssessmentRepository assessmentRepository;
     private final AssessmentGenerator assessmentGenerator;
     private final QuestionsRepository questionsRepository;
+    private final InterviewRepository interviewRepository;
+    private final InterviewGeneratorService interviewGeneratorService;
 
     public MessageDTO isUserSessionRunning() {
         Users users = userSession.getUser();
@@ -158,6 +162,25 @@ public class DashboardService {
         }
 
         return score;
+    }
+
+    public java.util.List<String> generateInterview() {
+        Users user = userSession.getUser();
+        try {
+            String json = interviewGeneratorService.generateQuestions(user.getGoals().getTargetRole());
+            String clean = json.replaceAll("```json|```", "").trim();
+
+            JsonNode node = objectMapper.readTree(clean);
+
+            java.util.List<String> questions = new java.util.ArrayList<>();
+
+            for(JsonNode q : node.get("questions")) {
+                questions.add(q.asText());
+            }
+            return questions;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
