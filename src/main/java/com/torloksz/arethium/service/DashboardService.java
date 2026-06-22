@@ -164,18 +164,16 @@ public class DashboardService {
     public List<String> generateInterview() {
         Users user = userSession.getUser();
         try {
-            if (interviewRepository.findByUsers(user).isPresent()) {
-                Interview interview = interviewRepository.findByUsers(user).get();
-                interviewRepository.delete(interview);
-            }
-            String json = interviewGeneratorService.generateQuestions(user.getGoals().getTargetRole());
-            String clean = json.replaceAll("```json|```", "").trim();
+            String json =interviewGeneratorService.generateQuestions(user.getGoals().getTargetRole());
 
-            JsonNode node = objectMapper.readTree(clean);
+            String clean =json.replaceAll("```json|```", "").trim();
 
-            java.util.List<String> questions = new java.util.ArrayList<>();
+            JsonNode node =objectMapper.readTree(clean);
+
+            List<String> questions =new ArrayList<>();
 
             for(JsonNode q : node.get("questions")) {
+
                 questions.add(q.asText());
             }
             return questions;
