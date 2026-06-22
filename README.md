@@ -10,7 +10,7 @@ Transform Career Aspirations Into Measurable Readiness
 
 ![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge\&logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge\&logo=springboot\&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-Database-blue?style=for-the-badge\&logo=mysql)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?style=for-the-badge\&logo=postgresql)
 ![Gemini AI](https://img.shields.io/badge/Google-Gemini_AI-red?style=for-the-badge)
 ![Maven](https://img.shields.io/badge/Maven-Build-red?style=for-the-badge\&logo=apachemaven)
 
