@@ -37,7 +37,7 @@ public class DashboardController {
         MessageDTO messageDTO = dashboardService.isUserSessionRunning();
         if(!messageDTO.message().contains("Success"))
             return "redirect:/authorization/login";
-        model.addAllAttributes(dashboardService.getModules());
+        model.addAttribute("modules",dashboardService.getModules());
         return "roadmapPage";
     }
 

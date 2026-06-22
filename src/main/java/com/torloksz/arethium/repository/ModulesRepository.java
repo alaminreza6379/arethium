@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface ModulesRepository extends JpaRepository<Modules,Long> {
-    List<Modules> findByUsersId(Long users_id);
+    List<Modules> findByUsersIdOrderByModuleOrderAsc(Long usersId);
 
 
     @Transactional

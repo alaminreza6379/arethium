@@ -42,6 +42,8 @@ public class OnboardingService {
     @Transactional
     public MessageDTO saveUserGoals(String email, GoalsDTO goalsDTO) {
         try {
+            if(goalsDTO!=null) 
+                goalsRepository.delete(new Goals(goalsDTO.targetRole(), goalsDTO.targetCompany()));
             if (goalsDTO.targetRole() == null)
                 return new MessageDTO("Please Select your targetRole..");
             if (goalsDTO.targetCompany() == null)

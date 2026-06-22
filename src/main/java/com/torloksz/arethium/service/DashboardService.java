@@ -47,7 +47,7 @@ public class DashboardService {
     }
 
     public double findReadiness(Users user) {
-        List<Modules> modules = modulesRepository.findByUsersId(user.getId());
+        List<Modules> modules = modulesRepository.findByUsersIdOrderByModuleOrderAsc(user.getId());
         long completed = modules.stream()
                 .filter(Modules::isCompleted)
                 .count();
@@ -64,7 +64,7 @@ public class DashboardService {
     }
 
     public long findTime(Users user) {
-        List<Modules> modules = modulesRepository.findByUsersId(user.getId());
+        List<Modules> modules = modulesRepository.findByUsersIdOrderByModuleOrderAsc(user.getId());
         long timeLeft=0;
         for (Modules m:modules){
             if (!m.isCompleted())
@@ -74,11 +74,11 @@ public class DashboardService {
     }
 
     public List<Modules> getModules(Users user) {
-        return modulesRepository.findByUsersId(user.getId());
+        return modulesRepository.findByUsersIdOrderByModuleOrderAsc(user.getId());
     }
 
     public List<Modules> getModules() {
-        return modulesRepository.findByUsersId(userSession.getUser().getId());
+        return modulesRepository.findByUsersIdOrderByModuleOrderAsc(userSession.getUser().getId());
     }
 
     public void toggleModule(Long id) {

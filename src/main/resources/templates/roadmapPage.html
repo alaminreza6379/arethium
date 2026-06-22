@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Arethium - Dashboard</title>
+    <title>Arethium - Roadmap</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/roadmap.css}">
-    <link rel="stylesheet"
-          href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
 </head>
 <body>
 <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
 <section class="home">
-    <div class="hero-card">
-            <h2>Roadmap</h2>
+    <div class="roadmap-header">
+        <h1>Your Learning Roadmap</h1>
+        <p> Just click any module to toggle its status.</p>
     </div>
 
-    <ul class="module-list">
-        <li th:each="m : ${modules}" th:classappend="${m.isCompleted} ? 'completed-box' : 'pending-box'">
-            <form th:action="@{/dashboard/roadmap/toggle-modules/{id}(id=${m.id})}" method="post" style="display:inline;">
+    <ul class="roadmap-list">
+        <!-- Using the 'completed' field directly from your Java entity -->
+        <li th:each="m : ${modules}"
+            th:classappend="${m.isCompleted} ? 'completed-box' : 'pending-box'">
+
+            <form th:action="@{/dashboard/roadmap/toggle-module/{id}(id=${m.id})}" method="post">
                 <button type="submit" class="toggle-btn">
-                    <span th:text="${m.title}"></span>
+                    <div class="module-info">
+                        <i th:class="${m.isCompleted} ? 'bx bxs-check-circle' : 'bx bx-circle'"></i>
+                        <span th:text="${m.title}">Module Title</span>
+                        <div class="module-info">
+                            <span th:text="${m.description}" class="sub">Module Description</span>
+                        </div>
+                    </div>
                 </button>
             </form>
         </li>
     </ul>
 </section>
+
 <script th:src="@{/js/sidebar.js}"></script>
 </body>
 </html>

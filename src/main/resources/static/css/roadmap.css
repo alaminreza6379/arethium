@@ -1,23 +1,67 @@
-.simple-list {
+.roadmap-header {
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.roadmap-list {
     list-style: none;
     padding: 0;
+    max-width: 800px;
 }
 
-.simple-list li {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+.toggle-btn {
+    width: 100%;
+    background: white;
+    border: 1px solid #e0e0e0;
+    padding: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
-.simple-list li span.done {
+.toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.module-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Pending State */
+.pending-box .toggle-btn {
+    border-left: 6px solid #367298;
+    color: #333;
+}
+
+/* Completed State */
+.completed-box .toggle-btn {
+    border-left: 6px solid #28a745;
+    background-color: #f8fff9;
+    color: #555;
+}
+
+.completed-box span {
     text-decoration: line-through;
-    color: #888;
+    opacity: 0.7;
 }
 
-/* Optional: Make the checkbox look a bit better */
-input[type="checkbox"] {
-    cursor: pointer;
-    transform: scale(1.2);
+.bx {
+    font-size: 1.5rem;
+}
+
+.pending-box .bx { color: #367298; }
+.completed-box .bx { color: #28a745; }
+
+.sub {
+    color: #8acbda;
+
 }
