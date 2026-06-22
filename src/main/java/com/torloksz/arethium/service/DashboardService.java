@@ -73,8 +73,8 @@ public class DashboardService {
         return timeLeft;
     }
 
-    public Object getModules(Users user) {
-        return user.getModules();
+    public List<Modules> getModules(Users user) {
+        return modulesRepository.findByUsersId(user.getId());
     }
 
 }
