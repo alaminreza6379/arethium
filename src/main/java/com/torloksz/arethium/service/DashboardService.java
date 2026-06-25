@@ -79,7 +79,7 @@ public class DashboardService {
         long timeLeft=0;
         for (Modules m:modules){
             if (!m.isCompleted())
-                timeLeft+=m.getTime();
+             totalTime += module.getTime() == null ? 0 : module.getTime();
         }
         return timeLeft;
     }
