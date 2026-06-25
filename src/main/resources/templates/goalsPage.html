@@ -12,16 +12,11 @@
 
         <label>What role do you want?</label>
         <div class="custom-select">
-            <select th:field="*{targetRole}">
-                <option value="BACKEND" >Backend Engineer</option>
-                <option value="FRONTEND">Frontend Engineer</option>
-                <option value="FULLSTACK">Fullstack Engineer</option>
-                <option value="DEVOPS">DevOps Engineer</option>
-            </select>
+            <input type="text" th:field="*{targetRole}" placeholder="e.g., Engineer,Teacher">
         </div>
         <br>
         <label>Target Company (Optional)</label>
-        <input type="text" th:field="*{targetCompany}" placeholder="e.g., Google">
+        <input type="text" th:field="*{targetCompany}" placeholder="e.g., Google,Government School India">
 
         <button type="submit" class="btn-primary">Complete Setup</button>
 
