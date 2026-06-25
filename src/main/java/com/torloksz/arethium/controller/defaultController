@@ -1,0 +1,13 @@
+package com.torloksz.arethium.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class defaultController {
+  
+    @GetMapping("/")
+    public String register() {
+      return "redirect:/authorization/login";
+    }       
+}
