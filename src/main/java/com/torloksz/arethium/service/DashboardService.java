@@ -128,7 +128,9 @@ public class DashboardService {
     }
 
     public List<Questions> takeAssessment(Long id){
-        return assessmentRepository.findAssessmentsByModulesId(id).get().getQuestions();
+        if (assessmentRepository.findAssessmentsByModulesId(id).get().getQuestions()==null)
+            generateAssessment(id);
+        return assessmentRepository.findAssessmentsByModulesId(id).get().getQuestions(); 
     }
 
     public Modules getModule(Long id) {
