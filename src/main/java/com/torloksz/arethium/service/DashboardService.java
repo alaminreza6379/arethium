@@ -75,13 +75,12 @@ public class DashboardService {
     }
 
     public long findTime(Users user) {
-        List<Modules> modules = modulesRepository.findByUsersIdOrderByModuleOrderAsc(user.getId());
-        long timeLeft=0;
-        for (Modules m:modules){
-            if (!m.isCompleted())
-             totalTime += module.getTime() == null ? 0 : module.getTime();
-        }
-        return timeLeft;
+        return modulesRepository
+            .findByUsersIdOrderByModuleOrderAsc(user.getId())
+            .stream()
+            .filter(m -> !m.isCompleted())
+            .mapToLong(m -> m.getTime() == null ? 0 : m.getTime())
+            .sum();
     }
 
     public List<Modules> getModules(Users user) {
